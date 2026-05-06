@@ -1,0 +1,33 @@
+# Flash: Unordered Semantic ID + LLM Alignment
+# SimHash IDs on LLM text embeddings; semantic regularization aligns
+# aggregated item embeddings with LLM text embeddings via cosine similarity.
+
+# Metadata
+metadata: none
+
+# Sentence embedding model (for alignment)
+sent_emb_model: text-embedding-3-large
+sent_emb_dim: 3072
+
+# GPT-2 backbone
+max_item_seq_len: 50
+n_embd: 448
+n_layer: 2
+n_head: 2
+n_inner: 1024
+activation_function: gelu_new
+resid_pdrop: 0.0
+embd_pdrop: 0.5
+attn_pdrop: 0.5
+layer_norm_epsilon: 1e-12
+initializer_range: 0.02
+
+# Semantic ID (SimHash on LLM text embeddings)
+n_codebook: 32
+codebook_size: 256    # number of hyperplanes per slot is derived: ceil(log2(codebook_size))
+
+# Training
+temperature: 0.07
+codebook_dropout: 0.2
+align_weight: 0.2    # semantic regularization on aggregated item embeddings (0 = off)
+codebook_l2_weight: 0.002    # L2 regularization on codebook embeddings
