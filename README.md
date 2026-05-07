@@ -1,6 +1,6 @@
 # Flash
 
-**Flash = SimHash Semantic ID + LLM Alignment**
+**Flash = SimHash Semantic ID + Parallel decoding + LLM Alignment**
 
 Flash tokenizes each item into an unordered set of discrete codes via SimHash on LLM text embeddings, then predicts all codes in parallel. A semantic regularization loss aligns the learned item representations with frozen LLM embeddings, improving generalization.
 
@@ -54,7 +54,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --category=Beauty \
     --lr=0.01 \
     --n_codebook=32 \
-    --align_weight=0.2
+    --align_weight=0.1
 ```
 
 ### Sports and Outdoors
@@ -65,6 +65,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --category=Sports_and_Outdoors \
     --lr=0.003 \
     --n_codebook=64 \
+    --n_embd= 896 \
     --align_weight=0.2
 ```
 
@@ -88,7 +89,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --lr=0.001 \
     --n_codebook=64 \
     --codebook_size=512 \
-    --align_weight=0.05
+    --align_weight=0.1
 ```
 
 ## Project Structure
