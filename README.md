@@ -1,12 +1,18 @@
-# Flash
+# FLASH
 
-**Flash = SimHash Semantic ID + Parallel decoding + LLM Alignment**
+**FLASH = Fast LLM-Aligned SimHash for Generative Recommendation**
 
-Flash tokenizes each item into an unordered set of discrete codes via SimHash on LLM text embeddings, then predicts all codes in parallel. A semantic regularization loss aligns the learned item representations with frozen LLM embeddings, improving generalization.
+FLASH tokenizes each item into an unordered set of discrete semantic codes via SimHash on frozen LLM text embeddings, then predicts all code positions in parallel. A semantic alignment objective further anchors the learned item representations to the original LLM embedding space, improving recommendation performance and generalization.
 
-<div align="center">
-<img src="asset/model.png"/>
-</div>
+## Highlights
+
+- **Training-free semantic ID construction.** FLASH uses SimHash with fixed random projections and requires **no tokenizer training**, unlike learned quantization methods such as RQ-VAE.
+- **Fast tokenization.** Semantic IDs are constructed in **less than 0.5 seconds on CPU** across all four evaluated Amazon datasets. In our tokenization benchmarks, SimHash is **146×–2448× faster than RQ-VAE**, depending on the dataset and codebook configuration, even though RQ-VAE is measured on GPU.
+- **Low code collisions.** SimHash exhibits consistently low collision counts across datasets, and collisions rapidly decrease as the number of codebooks increases. Under matched configurations, its collision count is **comparable to or lower than RQ-VAE**.
+- **Parallel decoding.** Since SimHash code positions are unordered and do not have residual dependencies, FLASH predicts all semantic ID positions simultaneously instead of autoregressively.
+- **Semantic grounding.** An explicit alignment loss compensates for semantic information lost during discrete hashing by preserving information from the original LLM embedding space.
+
+![framework](https://hackmd.io/_uploads/SJuohq1sMx.png)
 
 ## Architecture
 
@@ -23,7 +29,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py --model=Flash --category=Beauty
 
 Available categories: `Beauty`, `Sports_and_Outdoors`, `Toys_and_Games`, `CDs_and_Vinyl`
 
-Datasets are downloaded automatically on first run. And the OpenAI's text-embedding can be download from: https://drive.google.com/file/d/1HLy4GVfIKWVlhajXmq9_hI8oWggeU7EL/view?usp=sharing
+Datasets are downloaded automatically on first run. The OpenAI text embeddings can be downloaded from: https://drive.google.com/file/d/1HLy4GVfIKWVlhajXmq9_hI8oWggeU7EL/view?usp=sharing
 
 ## Key Hyperparameters
 
@@ -57,17 +63,6 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --align_weight=0.1
 ```
 
-### Sports and Outdoors
-
-```bash
-CUDA_VISIBLE_DEVICES=0 python main.py \
-    --model=Flash \
-    --category=Sports_and_Outdoors \
-    --lr=0.003 \
-    --n_codebook=64 \
-    --n_embd= 896 \
-    --align_weight=0.2
-```
 
 ### Toys and Games
 
@@ -77,6 +72,18 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --category=Toys_and_Games \
     --lr=0.003 \
     --n_codebook=64 \
+    --align_weight=0.2
+```
+
+### Sports and Outdoors
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py \
+    --model=Flash \
+    --category=Sports_and_Outdoors \
+    --lr=0.003 \
+    --n_codebook=64 \
+    --n_embd=896 \
     --align_weight=0.2
 ```
 
@@ -109,4 +116,4 @@ genrec/
 
 ## License
 
-Flash is CC-BY-NC 4.0 licensed, as found in the LICENSE file.
+Flash is CC-BY-NC 4.0 licensed.
