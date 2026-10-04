@@ -12,7 +12,7 @@ FLASH tokenizes each item into an unordered set of discrete semantic codes via S
 - **Parallel decoding.** Since SimHash code positions are unordered and do not have residual dependencies, FLASH predicts all semantic ID positions simultaneously instead of autoregressively.
 - **Semantic grounding.** An explicit alignment loss compensates for semantic information lost during discrete hashing by preserving information from the original LLM embedding space.
 
-![framework](https://hackmd.io/_uploads/SJuohq1sMx.png)
+
 
 ## Architecture
 
