@@ -16,6 +16,10 @@ FLASH tokenizes each item into an unordered set of discrete semantic codes via S
 
 ## Architecture
 
+<p align="center">
+  <img src="asset/model.png" alt="FLASH framework" width="100%">
+</p>
+
 1. **SimHash Tokenization** — Each item's LLM text embedding is hashed into `m` codebook tokens via locality-sensitive hashing.
 2. **Token Aggregation** — Codebook embeddings are concatenated and projected to a single item vector, optionally aligned with the LLM embedding (cosine similarity loss).
 3. **GPT-2 Backbone** — Causal self-attention over the item sequence.
