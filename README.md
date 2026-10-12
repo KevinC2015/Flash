@@ -4,6 +4,10 @@
 
 FLASH tokenizes each item into an unordered set of discrete semantic codes via SimHash on frozen LLM text embeddings, then predicts all code positions in parallel. A semantic alignment objective further anchors the learned item representations to the original LLM embedding space, improving recommendation performance and generalization.
 
+## Paper
+
+Official implementation of **[Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment](https://arxiv.org/abs/2610.07402)**, accepted at **NeurIPS 2026**.
+
 ## Highlights
 
 - **Training-free semantic ID construction.** FLASH uses SimHash with fixed random projections and requires **no tokenizer training**, unlike learned quantization methods such as RQ-VAE.
@@ -116,6 +120,20 @@ genrec/
 ├── trainer.py            # Training loop + evaluation
 ├── evaluator.py          # Metrics (Recall, NDCG)
 └── utils.py              # Config, logging, utilities
+```
+
+## Citing this work
+
+Please cite our paper if you find this work or code helpful.
+
+```bibtex
+@inproceedings{liu2026rethinking,
+  title={Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment},
+  author={Yuqing Liu and Huiyuan Chen and Yibo Wang and Wooseong Yang and Philip S. Yu},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2026},
+  url={https://arxiv.org/abs/2610.07402}
+}
 ```
 
 ## License
