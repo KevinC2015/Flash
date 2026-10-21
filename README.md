@@ -1,6 +1,13 @@
-# FLASH
+<div align="center">
+  <img src="./asset/flash_logo.png" width="400"/>
 
-**FLASH = Fast LLM-Aligned SimHash for Generative Recommendation**
+[![Python](https://img.shields.io/badge/Python-3-blue)](https://www.python.org/) [![PyTorch](https://img.shields.io/badge/PyTorch-required-ee4c2c)](https://pytorch.org/) [![License](https://img.shields.io/badge/license-CC--BY--NC%204.0-green)](#license) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](../../issues)
+
+  <h1>FLASH</h1>
+  <h4>FLASH = Fast LLM-Aligned SimHash for Generative Recommendation</h4>
+</div>
+
+------
 
 FLASH tokenizes each item into an unordered set of discrete semantic codes via SimHash on frozen LLM text embeddings, then predicts all code positions in parallel. A semantic alignment objective further anchors the learned item representations to the original LLM embedding space, improving recommendation performance and generalization.
 
